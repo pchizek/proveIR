@@ -9,7 +9,7 @@ These Arduino sketches use:
 TimerOne Library by Paul Stoffregen
 https://github.com/PaulStoffregen/TimerOne
 
-All versions take raw ADC Reads of IR proximity sensors, and if the returned distance is less than a certain threshold, (which means the voltage will be above a certain threshold) then the timer will start. It stops when a high voltage is detected at the end gate, returning the time between detections.
+This sketch takes raw ADC Reads of IR proximity sensors, and if the returned distance is less than a certain threshold, (which means the voltage will be above a certain threshold) then the timer will start. It stops when a high voltage is detected at the end gate, returning the time between detections. It supports both a two and four sensor mode with a #define.
 
 <b> Usage and Commands </b>
 
