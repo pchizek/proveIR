@@ -13,6 +13,8 @@
 #include <TimerOne.h>
 
 //#define DEBUG
+//#define _4SENSOR
+
 
 int           threshold = 160;
 int           reads = 8;      //Make sure this number is the same as the number of times analogRead() is called  
@@ -33,8 +35,13 @@ void setup() {
   Serial.begin(9600);
 
   Serial.println("Reading...");
-  for (int i = 0; i<4; i++){
 
+  #ifdef _4SENSOR 
+    for (int i = 0; i<4; i++){
+  #else 
+    for (int i = 0; i<3; i += 2){
+  #endif
+  
     for (int j= 0;j<10;j++){
     readSum += analogRead(i);
     delayMicroseconds(10);
@@ -127,8 +134,12 @@ void loop() {
 
       Serial.println("Reading...");
     
-      for (int i = 0; i<4; i++){
-
+      #ifdef _4SENSOR 
+        for (int i = 0; i<4; i++){
+      #else 
+        for (int i = 0; i<3; i += 2){
+      #endif
+      
           for (int j= 0;j<10;j++){
           readSum += analogRead(i);
           delayMicroseconds(10);
@@ -244,7 +255,9 @@ void checkStart(){
     Timer1.attachInterrupt(checkStart);
   }
 
-  startPin ^= 1;
+  #ifdef _4SENSOR 
+    startPin ^= 1;
+  #endif
   
 }
 
@@ -291,7 +304,10 @@ void checkEnd(){
     Timer1.attachInterrupt(checkEnd);
   }
 
-  endPin ^= 1;
+  #ifdef _4SENSOR 
+    startPin ^= 1;
+  #endif
+
 }
 
 String cmdSerialRead(void){
